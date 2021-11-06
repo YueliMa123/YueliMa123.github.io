@@ -1,0 +1,12 @@
+---
+title: "My awesome website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# This is Yueli's awesome website
+
+![](images/pic.jpg)
+Here's link to my academic experience [about](about.html)
