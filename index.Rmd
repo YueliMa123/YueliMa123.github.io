@@ -6,7 +6,7 @@ output:
     toc_float: true
 ---
 
-# This is Yueli's awesome website
+# This is Yueli's awesome website, you can learn more about me on this website!
 
 ![](images/pic.jpg)
 Here's link to my academic experience [about](about.html)

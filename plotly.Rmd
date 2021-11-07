@@ -1,0 +1,41 @@
+---
+title: "plotly"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Making some plotly
+
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+```
+
+Let's look at instacart!
+```{r}
+data("instacart")
+instacart = 
+  instacart %>%
+  select(order_id, reordered, order_dow, order_hour_of_day, days_since_prior_order,department_id, product_name, order_number)%>%
+  filter(
+    department_id == 2
+  )
+instacart
+instacart%>%
+  plot_ly(
+    y = ~order_dow, color = ~product_name, type = "box", colors = "viridis"
+  )
+instacart%>%
+  count(product_name)%>%
+  mutate(product_name= fct_reorder(product_name,n))%>%
+  plot_ly(x = ~product_name, y = ~n, color = ~product_name, type = "bar", colors = "viridis")
+instacart%>%
+  plot_ly(
+    x = ~order_dow, y = ~order_hour_of_day, type = "scatter", mode = "markers",color = ~product_name
+  )
+
+
+```

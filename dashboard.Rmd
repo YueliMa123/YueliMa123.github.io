@@ -1,0 +1,57 @@
+---
+title: "dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+```
+```{r}
+data("instacart")
+instacart = 
+  instacart %>%
+  select(order_id, reordered, order_dow, order_hour_of_day, days_since_prior_order,department_id, product_name, order_number)%>%
+  filter(
+    department_id == 2
+  )
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+instacart%>%
+  plot_ly(
+    y = ~order_dow, color = ~product_name, type = "box", colors = "viridis"
+  )
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+instacart%>%
+  count(product_name)%>%
+  mutate(product_name= fct_reorder(product_name,n))%>%
+  plot_ly(x = ~product_name, y = ~n, color = ~product_name, type = "bar", colors = "viridis")
+```
+
+### Chart C
+
+```{r}
+instacart%>%
+  plot_ly(
+    x = ~order_dow, y = ~order_hour_of_day, type = "scatter", mode = "markers",color = ~product_name
+  )
+```
+
